@@ -1,0 +1,23 @@
+# Base image
+FROM rust:1.72 AS builder
+
+# Set the working directory
+WORKDIR /app
+
+# Copy the source code
+COPY . .
+
+# Build the Rust application
+RUN cargo build --release
+
+# Use a smaller base image for runtime
+FROM debian:buster-slim
+
+# Copy the binary from the builder stage
+COPY --from=builder /app/target/release/shard-node /usr/local/bin/shard-node
+
+# Expose the ports for communication
+EXPOSE 8000
+
+# Command to run the shard node
+CMD ["shard-node"]

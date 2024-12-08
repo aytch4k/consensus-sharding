@@ -1,0 +1,14 @@
+[package]
+name = "shard-node"
+version = "0.1.0"
+authors = ["Your Name <your.email@example.com>"]
+edition = "2021"
+
+[dependencies]
+actix-web = "4.0"
+serde = { version = "1.0", features = ["derive"] }
+prometheus = "0.13.0"
+tokio = { version = "1", features = ["full"] }
+
+[features]
+default = ["serde"]

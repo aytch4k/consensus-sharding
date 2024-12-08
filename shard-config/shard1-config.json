@@ -1,0 +1,9 @@
+{
+    "shard_id": 1,
+    "port": 8001,
+    "validators": 4,
+    "max_transactions_per_block": 1000,
+    "block_time_milliseconds": 500,
+    "state_storage": "rocksdb"
+  }
+  

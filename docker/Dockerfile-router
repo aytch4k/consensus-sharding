@@ -1,0 +1,17 @@
+# Base image for Python
+FROM python:3.11-slim
+
+# Set the working directory inside the container
+WORKDIR /app
+
+# Copy the application files
+COPY router/ .
+
+# Install Python dependencies, including Prometheus Flask client
+RUN pip install --no-cache-dir -r requirements.txt
+
+# Expose the port for the Flask app
+EXPOSE 8080
+
+# Command to start the router
+CMD ["python", "router.py"]

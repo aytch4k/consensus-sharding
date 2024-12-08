@@ -1,0 +1,16 @@
+global:
+  scrape_interval: 15s
+  evaluation_interval: 15s
+
+scrape_configs:
+  - job_name: 'shard_nodes'
+    static_configs:
+      - targets: 
+          - shard1:8001
+          - shard2:8002
+          - shard3:8003
+
+  - job_name: 'transaction_router'
+    static_configs:
+      - targets: 
+          - router:8080

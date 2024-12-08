@@ -1,0 +1,55 @@
+version: "3.9"
+services:
+  shard1:
+    build:
+      context: .
+      dockerfile: Dockerfile-shard
+    container_name: shard1
+    environment:
+      - SHARD_CONFIG=${SHARD1_CONFIG}
+    ports:
+      - "8001:8001"
+    volumes:
+      - ./shard-config:/app/shard-config
+
+  shard2:
+    build:
+      context: .
+      dockerfile: Dockerfile-shard
+    container_name: shard2
+    environment:
+      - SHARD_CONFIG=${SHARD2_CONFIG}
+    ports:
+      - "8002:8002"
+    volumes:
+      - ./shard-config:/app/shard-config
+
+  shard3:
+    build:
+      context: .
+      dockerfile: Dockerfile-shard
+    container_name: shard3
+    environment:
+      - SHARD_CONFIG=${SHARD3_CONFIG}
+    ports:
+      - "8003:8003"
+    volumes:
+      - ./shard-config:/app/shard-config
+
+  router:
+    build:
+      context: .
+      dockerfile: router/Dockerfile
+    container_name: router
+    depends_on:
+      - shard1
+      - shard2
+      - shard3
+    ports:
+      - "8080:8080"
+    networks:
+      - shardnet
+
+networks:
+  shardnet:
+    driver: bridge

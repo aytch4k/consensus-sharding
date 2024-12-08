@@ -1,0 +1,65 @@
+{
+    "dashboard": {
+      "id": null,
+      "title": "Blockchain Sharding Metrics",
+      "timezone": "browser",
+      "panels": [
+        {
+          "type": "stat",
+          "title": "Total Transactions Processed",
+          "datasource": "Prometheus",
+          "targets": [
+            {
+              "expr": "sum(processed_transactions_total)",
+              "legendFormat": "Total Transactions",
+              "intervalFactor": 2
+            }
+          ],
+          "gridPos": { "x": 0, "y": 0, "w": 6, "h": 3 }
+        },
+        {
+          "type": "graph",
+          "title": "Transactions Per Second (TPS)",
+          "datasource": "Prometheus",
+          "targets": [
+            {
+              "expr": "rate(processed_transactions_total[1m])",
+              "legendFormat": "TPS",
+              "intervalFactor": 2
+            }
+          ],
+          "gridPos": { "x": 6, "y": 0, "w": 12, "h": 6 }
+        },
+        {
+          "type": "graph",
+          "title": "Shard Latency (ms)",
+          "datasource": "Prometheus",
+          "targets": [
+            {
+              "expr": "shard_processing_latency_milliseconds",
+              "legendFormat": "{{shard}}",
+              "intervalFactor": 2
+            }
+          ],
+          "gridPos": { "x": 0, "y": 3, "w": 12, "h": 6 }
+        },
+        {
+          "type": "stat",
+          "title": "Failed Transactions",
+          "datasource": "Prometheus",
+          "targets": [
+            {
+              "expr": "sum(failed_transactions_total)",
+              "legendFormat": "Failed Transactions",
+              "intervalFactor": 2
+            }
+          ],
+          "gridPos": { "x": 6, "y": 3, "w": 6, "h": 3 }
+        }
+      ],
+      "refresh": "10s",
+      "schemaVersion": 25,
+      "version": 1
+    }
+  }
+  
